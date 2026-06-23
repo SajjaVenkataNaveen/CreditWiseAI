@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreditWise AI Result</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">💳 CreditWise AI</div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+        </div>
+    </nav>
+
+    <div class="assessment-container">
+
+        <h1>Your Assessment Result</h1>
+
+        <div class="question-card">
+
+            <div id="scoreDisplay" class="result-score"></div>
+
+            <div class="score-bar">
+                <div id="scoreFill" class="score-fill"></div>
+            </div>
+
+            <div id="categoryDisplay" class="result-category"></div>
+
+            <p id="messageDisplay"></p>
+
+            <div class="ai-box">
+
+                <h3>🤖 AI Recommendation</h3>
+
+                <ul id="recommendationList"></ul>
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <a href="assessment.html" class="btn">
+            Take Assessment Again
+        </a>
+
+    </div>
+
+    <script>
+
+        const score =
+            Number(
+                localStorage.getItem(
+                    "psychometricScore"
+                )
+            );
+
+            const percentage =
+            (score / 100) * 100;
+
+            const scoreFill =
+            document.getElementById("scoreFill");
+
+            if(score >= 80){
+
+                scoreFill.style.background =
+                "#22c55e";
+
+            }
+            else if(score >= 60){
+
+                scoreFill.style.background =
+                "#FFD700";
+
+            }
+            else if(score >= 40){
+
+                scoreFill.style.background =
+                "#f97316";
+
+            }
+            else{
+
+                scoreFill.style.background =
+                "#ef4444";
+
+            }
+
+            document.getElementById(
+                "scoreFill"
+            ).style.width =
+            `${percentage}%`;
+
+        document.getElementById(
+            "scoreDisplay"
+        ).innerText =
+            `Psychometric Score: ${score}/100`;
+
+        let category = "";
+        let message = "";
+        let recommendations = [];
+
+        if(score >= 80){
+
+            category = "EXCELLENT";
+            message =
+            "Strong financial behavior and decision making.";
+
+            recommendations = [
+                "Maintain your current saving habits",
+                "Explore long-term investments",
+                "Keep building emergency funds"
+             ];
+
+        }
+        else if(score >= 60){
+
+            category = "GOOD";
+            message =
+            "Good financial habits with room for improvement.";
+
+            recommendations = [
+                "Increase monthly savings",
+                "Improve long-term planning",
+                "Track spending more regularly"
+            ];
+
+        }
+        else if(score >= 40){
+
+            category = "FAIR";
+            message =
+            "Average financial profile.";
+
+            recommendations = [
+                "Reduce unnecessary expenses",
+                "Create a monthly budget",
+                "Build an emergency fund"
+            ];
+
+        }
+        else{
+
+            category = "POOR";
+            message =
+            "Needs improvement in financial discipline.";
+
+            recommendations = [
+                "Start budgeting immediately",
+                "Reduce debt usage",
+                "Focus on saving consistently"
+            ];
+
+        }
+
+        document.getElementById(
+            "categoryDisplay"
+        ).innerHTML =
+        `${category} (${Math.round(percentage)}%)`;
+
+        document.getElementById(
+            "messageDisplay"
+        ).innerText = message;
+
+        document.getElementById(
+            "categoryDisplay"
+        ).innerHTML =
+        `${category} (${Math.round(percentage)}%)`;
+
+        const list =
+        document.getElementById(
+            "recommendationList"
+        );
+
+        recommendations.forEach(item => {
+
+            const li =
+            document.createElement("li");
+
+            li.textContent = item;
+
+            list.appendChild(li);
+
+        });
+
+    </script>
+
+</body>
+</html>

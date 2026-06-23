@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreditWise AI - Model Explanation</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        body{
+            margin:0;
+            font-family:Segoe UI,sans-serif;
+            background:linear-gradient(135deg,#0f2a52,#6bb8f5);
+            color:white;
+        }
+
+        .container{
+            width:90%;
+            max-width:1200px;
+            margin:auto;
+            padding:30px 0;
+        }
+
+        .page-title{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        .page-title h1{
+            font-size:42px;
+            margin-bottom:10px;
+        }
+
+        .page-title p{
+            color:#d8d8d8;
+            font-size:18px;
+        }
+
+        .feature-card{
+            background:#1d2b64;
+            border-radius:18px;
+            padding:30px;
+            margin-bottom:30px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .feature-card h2{
+            margin-bottom:25px;
+        }
+
+        .feature-item{
+            margin-bottom:25px;
+        }
+
+        .feature-header{
+            display:flex;
+            justify-content:space-between;
+            margin-bottom:8px;
+            font-weight:600;
+        }
+
+        .bar{
+            width:100%;
+            height:28px;
+            background:#44508f;
+            border-radius:20px;
+            overflow:hidden;
+        }
+
+        .fill{
+            height:100%;
+            background:#ffd60a;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:black;
+            font-weight:bold;
+        }
+
+        .info-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:25px;
+            margin-top:20px;
+        }
+
+        .info-card{
+            background:#24356f;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .info-card h3{
+            margin-top:0;
+            color:#ffd60a;
+        }
+
+        .info-card ul{
+            padding-left:20px;
+        }
+
+        .info-card li{
+            margin-bottom:10px;
+        }
+
+        .btn-container{
+            text-align:center;
+            margin-top:35px;
+        }
+
+        .btn{
+            display:inline-block;
+            background:#ffd60a;
+            color:#000;
+            padding:14px 30px;
+            border-radius:10px;
+            text-decoration:none;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            transform:translateY(-3px);
+        }
+
+        @media(max-width:900px){
+
+            .info-grid{
+                grid-template-columns:1fr;
+            }
+
+            .page-title h1{
+                font-size:30px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="page-title">
+
+        <h1>Model Transparency</h1>
+
+        <p>
+            Understand how CreditWise AI evaluates
+            repayment behavior and predicts credit scores.
+        </p>
+
+    </div>
+
+    <div class="feature-card">
+
+        <h2>Feature Importance</h2>
+
+        <div class="feature-item">
+
+            <div class="feature-header">
+                <span>Financial Literacy</span>
+                <span>25%</span>
+            </div>
+
+            <div class="bar">
+                <div class="fill" style="width:100%;">
+                    25%
+                </div>
+            </div>
+
+        </div>
+
+        <div class="feature-item">
+
+            <div class="feature-header">
+                <span>Numerical Reasoning</span>
+                <span>15%</span>
+            </div>
+
+            <div class="bar">
+                <div class="fill" style="width:60%;">
+                    15%
+                </div>
+            </div>
+
+        </div>
+
+        <div class="feature-item">
+
+            <div class="feature-header">
+                <span>Social Capital</span>
+                <span>8%</span>
+            </div>
+
+            <div class="bar">
+                <div class="fill" style="width:32%;">
+                    8%
+                </div>
+            </div>
+
+        </div>
+
+        <div class="feature-item">
+
+            <div class="feature-header">
+                <span>Consistency Score</span>
+                <span>7%</span>
+            </div>
+
+            <div class="bar">
+                <div class="fill" style="width:30%;">
+                    7%
+                </div>
+            </div>
+
+        </div>
+
+        <div class="feature-item">
+
+            <div class="feature-header">
+                <span>Mobile Usage Score</span>
+                <span>7%</span>
+            </div>
+
+            <div class="bar">
+                <div class="fill" style="width:29%;">
+                    7%
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="info-grid">
+
+        <div class="info-card">
+
+            <h3>Why This Matters</h3>
+
+            <p>
+                Financial Literacy is the strongest predictor
+                of repayment behavior in the CreditWise AI model.
+            </p>
+
+            <p>
+                Users with stronger financial awareness,
+                planning ability and numerical reasoning
+                generally demonstrate better repayment habits.
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <h3>Model Details</h3>
+
+            <ul>
+                <li>Algorithm: Random Forest</li>
+                <li>Accuracy: 93.3%</li>
+                <li>ROC-AUC: 98.6%</li>
+                <li>Training Samples: 10,000</li>
+                <li>Features Used: 17</li>
+            </ul>
+
+        </div>
+
+        <div class="info-card">
+
+            <h3>Key Insights</h3>
+
+            <ul>
+                <li>Financial Literacy has the highest impact.</li>
+                <li>Numerical Reasoning strongly influences repayment prediction.</li>
+                <li>Social Capital contributes to trustworthiness assessment.</li>
+                <li>Consistency reflects behavioral reliability.</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="btn-container">
+
+        <a href="credit-score.html" class="btn">
+            ← Back to Credit Report
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

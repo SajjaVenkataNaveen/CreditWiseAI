@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Score</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">💳 CreditWise AI</div>
+
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+    </div>
+</nav>
+
+<div class="assessment-container">
+
+    <h1>Your Credit Score</h1>
+
+    <div class="question-card score-card">
+
+        <div class="circle-wrap">
+
+            <svg width="240" height="240">
+
+                <circle
+                    class="bg-circle"
+                    cx="120"
+                    cy="120"
+                    r="100">
+                </circle>
+
+                <circle
+                    id="progressCircle"
+                    class="progress-circle"
+                    cx="120"
+                    cy="120"
+                    r="100">
+                </circle>
+
+            </svg>
+
+            <div class="score-text">
+
+                <h2 id="creditScore">0</h2>
+
+                <p id="scoreLabel">
+                    Calculating...
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Financial Summary -->
+
+<div class="question-card">
+
+    <h2>Financial Summary</h2>
+
+    <div class="summary-grid">
+        
+
+        <div class="summary-box">
+            <h4>Psychometric</h4>
+            <p id="psychoScore"></p>
+        </div>
+
+        <div class="summary-box">
+            <h4>Income</h4>
+            <p id="incomeValue"></p>
+        </div>
+
+        <div class="summary-box">
+            <h4>Expenses</h4>
+            <p id="expenseValue"></p>
+        </div>
+
+        <div class="summary-box">
+            <h4>Savings</h4>
+            <p id="savingValue"></p>
+        </div>
+
+        <div class="summary-box">
+            <h4>Repayment Chance</h4>
+            <p id="probabilityValue"></p>
+        </div>
+
+        <div class="question-card">
+
+            <h2>AI Explanation</h2>
+
+            <div id="aiReason">
+                Loading explanation...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- AI Insight -->
+
+<div class="question-card">
+
+    <h2>AI Financial Insight</h2>
+
+    <div id="aiInsight">
+
+        Your financial profile is being analyzed...
+
+    </div>
+
+</div>
+
+<div style="text-align:center; margin-top:20px;">
+
+    <button
+        id="downloadReportBtn"
+        class="btn"
+        style="margin-right:10px;">
+        Download PDF Report
+    </button>
+
+    <a href="feature-importance.html"
+       class="btn">
+       View Model Explanation
+    </a>
+
+</div>
+
+
+<!-- Recommendations -->
+
+<div class="question-card">
+
+    <h2>Recommendations</h2>
+
+    <ul id="recommendationList"></ul>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="credit-score.js"></script>
+
+    <div class="question-card">
+
+    <h2>Model Performance</h2>
+
+    <div class="summary-grid">
+
+        <div class="summary-box">
+            <h4>Accuracy</h4>
+            <p>93.3%</p>
+        </div>
+
+        <div class="summary-box">
+            <h4>ROC-AUC</h4>
+            <p> 98.6%</p>
+        </div>
+
+        <div class="summary-box">
+            <h4>Fairness Gap</h4>
+            <p>0.33%</p>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

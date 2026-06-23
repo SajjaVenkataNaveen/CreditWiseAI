@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Details</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">💳 CreditWise AI</div>
+
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+    </div>
+</nav>
+
+<div class="assessment-container">
+
+    <h1>Financial Profile</h1>
+
+    <div class="question-card">
+
+        <h2>Personal Information</h2>
+
+        <div class="form-grid">
+
+            <div>
+                <label>Age</label>
+                <input
+                    type="number"
+                    id="age"
+                    placeholder="Enter age"
+                >
+            </div>
+
+            <div>
+                <label>Gender</label>
+                <select id="gender">
+                    <option value="0">Male</option>
+                    <option value="1">Female</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Education Years</label>
+                <input
+                    type="number"
+                    id="education"
+                    placeholder="Years of education"
+                >
+            </div>
+
+            <div>
+                <label>Employment Type</label>
+                <select id="employment">
+                    <option>Salaried</option>
+                    <option>Business</option>
+                    <option>Freelancer</option>
+                    <option>Student</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Monthly Income (₹)</label>
+                <input
+                    type="number"
+                    id="income"
+                    placeholder="Enter monthly income"
+                >
+            </div>
+
+            <div>
+                <label>Monthly Expenses (₹)</label>
+                <input
+                    type="number"
+                    id="expenses"
+                    placeholder="Enter monthly expenses"
+                >
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="question-card">
+
+        <h2>Financial Snapshot</h2>
+
+        <div class="snapshot-grid">
+
+            <div class="snapshot-box">
+                <h3>Income</h3>
+                <p> <span id="incomeView">0</span></p>
+            </div>
+
+            <div class="snapshot-box">
+                <h3>Expenses</h3>
+                <p><span id="expenseView">0</span></p>
+            </div>
+
+            <div class="snapshot-box">
+                <h3>Savings</h3>
+                <p><span id="savingView">0</span></p>
+            </div>
+
+            <div class="snapshot-box">
+                <h3>Savings Rate</h3>
+                <p><span id="rateView">0</span></p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="navigation">
+
+        <button onclick="window.location.href='assessment.html'">
+            Back
+        </button>
+
+        <button id="analyzeBtn">
+            Generate Credit Score
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+document
+.getElementById("analyzeBtn")
+.addEventListener("click", () => {
+
+    const sectionScores =
+        JSON.parse(
+            localStorage.getItem(
+                "sectionScores"
+            )
+        );
+
+    const data = {
+
+        age:
+        document.getElementById("age").value,
+
+        gender:
+        document.getElementById("gender").value === "1"
+            ? "Female"
+            : "Male",
+
+        education_years:
+        document.getElementById("education").value,
+
+        income_level:
+        document.getElementById("income").value,
+
+        expenses:
+        document.getElementById("expenses").value,
+
+        employment:
+        document.getElementById("employment").value,
+
+        financial_literacy:
+        sectionScores.financial_literacy,
+
+        risk_preference:
+        sectionScores.risk_preference,
+
+        numerical_reasoning:
+        sectionScores.numerical_reasoning,
+
+        social_capital:
+        sectionScores.social_capital,
+
+        consistency_score:
+        sectionScores.consistency_score
+
+    };
+
+    localStorage.setItem(
+        "financialData",
+        JSON.stringify(data)
+    );
+
+    window.location.href =
+        "credit-score.html";
+
+});
+
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
