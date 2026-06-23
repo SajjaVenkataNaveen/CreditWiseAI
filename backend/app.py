@@ -6,6 +6,15 @@ import pandas as pd
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/")
+def home():
+    return jsonify({
+        "status": "running",
+        "message": "CreditWise AI API is live"
+    })
+
+model = joblib.load("../models/random_forest.pkl")
+
 model = joblib.load("../models/random_forest.pkl")
 
 @app.route("/predict", methods=["POST"])
