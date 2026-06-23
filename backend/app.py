@@ -15,8 +15,6 @@ def home():
 
 model = joblib.load("../models/random_forest.pkl")
 
-model = joblib.load("../models/random_forest.pkl")
-
 @app.route("/predict", methods=["POST"])
 def predict():
 
