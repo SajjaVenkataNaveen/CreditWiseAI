@@ -129,6 +129,8 @@ def predict():
 
     repayment_probability = round((credit_score - 300) / 550, 4)
 
+    repayment_probability = round((credit_score - 300) / 550, 2)
+
     return jsonify({
         "credit_score": credit_score,
         "category": category,

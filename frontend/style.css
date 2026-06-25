@@ -212,14 +212,14 @@ nav{
 
 .question-card{
     background:#172554;
-
     padding:25px;
-
     margin:25px 0;
-
     border-radius:12px;
-
     box-shadow:0 0 15px rgba(0,0,0,0.2);
+
+    width:100%;
+    max-width:100%;
+    overflow:hidden;
 }
 
 .question-card p{
@@ -519,8 +519,16 @@ select{
 
 .summary-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:repeat(3,1fr);
     gap:20px;
+}
+
+@media(max-width:768px){
+
+    .summary-grid{
+        grid-template-columns:1fr;
+    }
+
 }
 
 .feature-item{
@@ -645,5 +653,36 @@ select{
         margin:10px 0;
         text-align:center;
     }
+
+}
+
+html,
+body{
+    width:100%;
+    overflow-x:hidden;
+}
+
+*{
+    max-width:100%;
+}
+
+.button-group{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+@media(max-width:768px){
+
+.button-group{
+    flex-direction:column;
+}
+
+.button-group .btn{
+    width:100%;
+    margin:0;
+}
 
 }
