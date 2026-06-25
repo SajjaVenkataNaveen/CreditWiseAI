@@ -83,10 +83,9 @@ nav{
 /* ================= BUTTON ================= */
 
 .btn{
-    margin-top:25px;
-
-    padding:15px 35px;
-
+    display:inline-block;
+    margin:10px;
+    padding:15px 25px;
     background:#FFD700;
     color:#082032;
 
@@ -481,6 +480,8 @@ select{
 }
 
 .summary-box{
+    width:100%;
+    min-width:0;
     background:rgba(255,255,255,0.08);
     border:1px solid rgba(255,255,255,0.15);
     border-radius:15px;
@@ -518,7 +519,7 @@ select{
 
 .summary-grid{
     display:grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:20px;
 }
 
@@ -597,6 +598,52 @@ select{
 
     body{
         overflow-x:hidden;
+    }
+
+}
+
+@media (max-width:768px){
+
+    body{
+        overflow-x:hidden;
+    }
+
+    .assessment-container{
+        width:100%;
+        max-width:100%;
+        padding:90px 15px 40px;
+    }
+
+    .question-card{
+        width:100%;
+        overflow:hidden;
+    }
+
+    .summary-grid{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+
+    .summary-box{
+        width:100%;
+    }
+
+    .circle-wrap{
+        width:190px;
+        height:190px;
+    }
+
+    .circle-wrap svg{
+        width:190px;
+        height:190px;
+    }
+
+    .btn{
+        display:block;
+        width:100%;
+        margin:10px 0;
+        text-align:center;
     }
 
 }

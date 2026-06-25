@@ -196,10 +196,11 @@ fetch(
     ).innerText =
         label;
 
-    document.getElementById(
-        "probabilityValue"
-    ).innerText =
-        (result.probability * 100).toFixed(1) + "%";
+    const repayment =
+    result.repayment_probability ?? 0;
+
+    document.getElementById("probabilityValue").innerText =
+        (repayment * 100).toFixed(1) + "%";
     document.getElementById(
     "aiInsight"
 ).innerHTML = `
@@ -212,7 +213,7 @@ fetch(
     <br><br>
 
     Repayment Probability:
-    <strong>${(result.probability * 100).toFixed(1)}%</strong>
+    <strong>${(result.repayment_probability * 100).toFixed(1)}%</strong>
 
     <br><br>
 

@@ -127,10 +127,12 @@ def predict():
     else:
         category = "Poor"
 
+    repayment_probability = round((credit_score - 300) / 550, 4)
+
     return jsonify({
         "credit_score": credit_score,
-        "category": category
+        "category": category,
+        "repayment_probability": repayment_probability
     })
-
 if __name__ == "__main__":
     app.run(debug=True)
