@@ -480,13 +480,6 @@ select{
     font-size:18px;
 }
 
-.summary-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-    margin-top:20px;
-}
-
 .summary-box{
     background:rgba(255,255,255,0.08);
     border:1px solid rgba(255,255,255,0.15);
@@ -554,4 +547,56 @@ select{
     font-weight:bold;
     text-align:center;
     line-height:28px;
+}
+
+@media (max-width:768px){
+
+    nav{
+        padding:15px 20px;
+    }
+
+    .assessment-container{
+        width:95%;
+        padding:100px 10px 40px;
+    }
+
+    .circle-wrap{
+        width:200px;
+        height:200px;
+    }
+
+    .circle-wrap svg{
+        width:200px;
+        height:200px;
+    }
+
+    .score-text h2{
+        font-size:48px;
+    }
+
+    .score-text p{
+        font-size:16px;
+    }
+
+    .summary-grid{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+
+    .summary-box{
+        width:100%;
+    }
+
+    .question-card{
+        padding:20px;
+    }
+
+    #aiInsight{
+        font-size:15px;
+    }
+
+    body{
+        overflow-x:hidden;
+    }
+
 }
