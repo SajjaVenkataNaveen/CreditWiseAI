@@ -26,93 +26,97 @@ def predict():
 
     expenses = int(data["expenses"])
 
-    savings = income - expenses
+    psychometric_score = (
 
-    savings_rate = (
-        savings / income
-    ) * 100 if income > 0 else 0
+        0.30 * float(data["financial_literacy"])
+
+        + 0.25 * float(data["numerical_reasoning"])
+
+        + 0.20 * float(data["consistency_score"])
+
+        + 0.15 * float(data["social_capital"])
+
+        + 0.10 * (
+            100 - float(data["risk_preference"])
+        )
+
+    )
 
     input_data = pd.DataFrame([{
 
-        "gender": gender,
+    "gender": gender,
 
-        "age":
-            int(data["age"]),
+    "age": int(data["age"]),
 
-        "education_years":
-            int(data["education_years"]),
+    "education_years": int(data["education_years"]),
 
-        "income_level":
-            income,
+    "income_level": income,
 
-        "financial_literacy":
-            float(data["financial_literacy"]),
+    "financial_literacy": float(data["financial_literacy"]),
 
-        "risk_preference":
-            float(data["risk_preference"]),
+    "numerical_reasoning": float(data["numerical_reasoning"]),
 
-        "numerical_reasoning":
-            float(data["numerical_reasoning"]),
+    "risk_preference": float(data["risk_preference"]),
 
-        "social_capital":
-            float(data["social_capital"]),
+    "social_capital": float(data["social_capital"]),
 
-        "consistency_score":
-            float(data["consistency_score"]),
+    "consistency_score": float(data["consistency_score"]),
 
-        "response_time":
-            float(data["response_time"]),
+    "response_time": float(data["response_time"]),
 
-        "answer_changes":
-            int(data["answer_changes"]),
+    "answer_changes": int(data["answer_changes"]),
 
-        "session_duration":
-            float(data["session_duration"]),
+    "session_duration": float(data["session_duration"]),
 
-        "mobile_usage_score":
-            float(data["mobile_usage_score"]),
+    "mobile_usage_score": float(data["mobile_usage_score"]),
 
-        "skipped_questions":
-            int(data["skipped_questions"]),
+    "skipped_questions": int(data["skipped_questions"]),
 
-        "expenses":
-    int(data["expenses"]),
+    "expenses": expenses,
 
-"savings":
-    float(data["savings"]),
+    "psychometric_score": psychometric_score
 
-"savings_rate":
-    float(data["savings_rate"]),
-
-    }])
+}])
 
     input_data = input_data[[
-        "gender",
-        "age",
-        "education_years",
-        "income_level",
-        "financial_literacy",
-        "risk_preference",
-        "numerical_reasoning",
-        "social_capital",
-        "consistency_score",
-        "response_time",
-        "answer_changes",
-        "session_duration",
-        "mobile_usage_score",
-        "skipped_questions",
-        "expenses",
-        "savings",
-        "savings_rate"
-    ]]
 
-    probability = model.predict_proba(
-        input_data
-    )[0][1]
+    "gender",
+
+    "age",
+
+    "education_years",
+
+    "income_level",
+
+    "financial_literacy",
+
+    "numerical_reasoning",
+
+    "risk_preference",
+
+    "social_capital",
+
+    "consistency_score",
+
+    "response_time",
+
+    "answer_changes",
+
+    "session_duration",
+
+    "mobile_usage_score",
+
+    "skipped_questions",
+
+    "expenses",
+
+    "psychometric_score"
+
+]]
 
     credit_score = int(
-        300 + probability * 550
-    )
+    model.predict(input_data)[0]
+)
 
     if credit_score >= 750:
         category = "Excellent"
@@ -125,7 +129,6 @@ def predict():
 
     return jsonify({
         "credit_score": credit_score,
-        "probability": round(probability, 4),
         "category": category
     })
 
