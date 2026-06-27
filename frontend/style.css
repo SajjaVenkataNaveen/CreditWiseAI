@@ -442,20 +442,23 @@ select{
 
 .bg-circle{
     fill:none;
-    stroke:rgba(255,255,255,0.15);
+    stroke:rgba(255,255,255,.12);
     stroke-width:14;
 }
 
 .progress-circle{
     fill:none;
-    stroke:#ffd700;
+    stroke:#FFD200;
     stroke-width:14;
     stroke-linecap:round;
 
-    stroke-dasharray:628;
-    stroke-dashoffset:628;
+    stroke-dasharray:628.32;
+    stroke-dashoffset:628.32;
 
-    transition:2s ease;
+    transform:rotate(-90deg);
+    transform-origin:120px 120px;
+
+    transition:stroke-dashoffset 1.4s ease;
 }
 
 .score-text{

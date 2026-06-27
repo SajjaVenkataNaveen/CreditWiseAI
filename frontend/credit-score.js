@@ -288,18 +288,19 @@ fetch(
         2 * Math.PI * 100;
 
     const progress =
-    Math.min((creditScore - 300) / 600, 1);
-
+    Math.max(
+        0,
+        Math.min(
+            (creditScore - 300) / 550,
+            1
+        )
+    );
     const offset =
-        circumference -
-        (progress * circumference);
+        circumference *
+        (1 - progress);
 
-    setTimeout(() => {
-
-        circle.style.strokeDashoffset =
-            offset;
-
-    }, 300);
+    circle.style.strokeDasharray = circumference;
+    circle.style.strokeDashoffset = offset;
 
 })
 
