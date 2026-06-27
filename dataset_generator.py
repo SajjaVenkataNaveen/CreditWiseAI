@@ -189,11 +189,54 @@ financial_component = (
 # CREDIT SCORE
 # ==========================================
 
-noise = np.random.normal(
-    0,
-    15,
-    n_users
+psychometric_component = (
+    data["psychometric_score"] / 100
 )
+
+financial_component = (
+
+    0.50 * (data["income_level"] / 100000)
+
+    +
+
+    0.50 * (
+        1 -
+        (
+            data["expenses"] /
+            data["income_level"]
+        ).clip(0,1)
+    )
+
+).clip(0,1)
+
+behavior_component = (
+
+    0.35 * (
+        (100 - data["skipped_questions"]*20)/100
+    )
+
+    +
+
+    0.25 * (
+        (100 - data["answer_changes"]*12.5)/100
+    )
+
+    +
+
+    0.20 * (
+        data["mobile_usage_score"]/100
+    )
+
+    +
+
+    0.20 * (
+        1 -
+        np.abs(
+            data["response_time"]-120
+        )/120
+    )
+
+).clip(0,1)
 
 credit_score = (
 
@@ -201,55 +244,89 @@ credit_score = (
 
     +
 
-    psychometric_component * 300
+    psychometric_component * 275
 
     +
 
-    behavior_component * 150
+    financial_component * 165
 
     +
 
-    financial_component * 80
+    behavior_component * 110
 
-    +
+)
 
-    noise
+# ==========================================
+# BONUSES
+# ==========================================
 
+credit_score += np.where(
+    data["psychometric_score"] >= 90,
+    55,
+    0
+)
+
+credit_score += np.where(
+    data["psychometric_score"] >= 80,
+    25,
+    0
+)
+
+credit_score += np.where(
+    data["income_level"] >= 70000,
+    20,
+    0
+)
+
+credit_score += np.where(
+    data["expenses"] <
+    data["income_level"]*0.40,
+    35,
+    0
+)
+
+credit_score += np.where(
+    (
+        data["psychometric_score"] >= 85
+    )
+    &
+    (
+        data["expenses"] <
+        data["income_level"]*0.50
+    ),
+    35,
+    0
 )
 
 # ==========================================
 # PENALTIES
 # ==========================================
 
-credit_score = np.where(
+credit_score -= np.where(
+    data["psychometric_score"] < 40,
+    80,
+    0
+)
 
+credit_score -= np.where(
     data["expenses"] >
     data["income_level"],
-
-    credit_score - 70,
-
-    credit_score
-
+    80,
+    0
 )
 
-credit_score = np.where(
-
-    data["psychometric_score"] < 40,
-
-    credit_score - 40,
-
-    credit_score
-
+credit_score -= np.where(
+    data["risk_preference"] > 80,
+    35,
+    0
 )
 
-credit_score = np.where(
+# Small natural randomness
 
-    data["psychometric_score"] > 80,
-
-    credit_score + 20,
-
-    credit_score
-
+credit_score += np.random.normal(
+    0,
+    8,
+    n_users
 )
 
 credit_score = np.clip(
