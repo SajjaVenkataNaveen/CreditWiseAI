@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import joblib
-import pandas as pd
 
 app = Flask(__name__)
 CORS(app)
@@ -13,128 +12,140 @@ def home():
         "message": "CreditWise AI API is live"
     })
 
+# Keep ML model for project purposes
 model = joblib.load("../models/random_forest.pkl")
+
 
 @app.route("/predict", methods=["POST"])
 def predict():
 
     data = request.json
 
-    gender = 1 if data["gender"] == "Female" else 0
+    income = float(data["income_level"])
+    expenses = float(data["expenses"])
 
-    income = int(data["income_level"])
+    savings = income - expenses
 
-    expenses = int(data["expenses"])
+    savings_rate = max(
+        0,
+        (savings / income) * 100
+    ) if income > 0 else 0
+
+    financial_literacy = float(data["financial_literacy"])
+    numerical_reasoning = float(data["numerical_reasoning"])
+    consistency_score = float(data["consistency_score"])
+    social_capital = float(data["social_capital"])
+    risk_preference = float(data["risk_preference"])
+    mobile_usage = float(data["mobile_usage_score"])
+    skipped_questions = int(data["skipped_questions"])
+    answer_changes = int(data["answer_changes"])
+    response_time = float(data["response_time"])
+
+    # =====================================
+    # PSYCHOMETRIC SCORE
+    # =====================================
 
     psychometric_score = (
 
-        0.30 * float(data["financial_literacy"])
+        0.30 * financial_literacy +
 
-        + 0.25 * float(data["numerical_reasoning"])
+        0.25 * numerical_reasoning +
 
-        + 0.20 * float(data["consistency_score"])
+        0.20 * consistency_score +
 
-        + 0.15 * float(data["social_capital"])
+        0.15 * social_capital +
 
-        + 0.10 * (
-            100 - float(data["risk_preference"])
-        )
+        0.10 * (100 - risk_preference)
 
     )
 
-    input_data = pd.DataFrame([{
+    # =====================================
+    # CREDIT SCORE
+    # =====================================
 
-    "gender": gender,
+    credit_score = 300
 
-    "age": int(data["age"]),
+    # Psychometric (320)
+    credit_score += psychometric_score * 3.2
 
-    "education_years": int(data["education_years"]),
+    # Income (120)
+    credit_score += min(income / 100000, 1) * 120
 
-    "income_level": income,
+    # Savings Rate (100)
+    credit_score += min(savings_rate, 100)
 
-    "financial_literacy": float(data["financial_literacy"]),
+    # Behaviour
+    credit_score += financial_literacy * 0.50
+    credit_score += numerical_reasoning * 0.40
+    credit_score += consistency_score * 0.50
+    credit_score += social_capital * 0.40
+    credit_score += mobile_usage * 0.40
 
-    "numerical_reasoning": float(data["numerical_reasoning"]),
+    # Bonuses
+    if psychometric_score >= 90:
+        credit_score += 35
 
-    "risk_preference": float(data["risk_preference"]),
+    if savings_rate >= 70:
+        credit_score += 35
 
-    "social_capital": float(data["social_capital"]),
+    if income >= 50000:
+        credit_score += 25
 
-    "consistency_score": float(data["consistency_score"]),
+    # Penalties
+    credit_score -= skipped_questions * 12
 
-    "response_time": float(data["response_time"]),
+    credit_score -= answer_changes * 5
 
-    "answer_changes": int(data["answer_changes"]),
+    if risk_preference > 70:
+        credit_score -= (risk_preference - 70) * 1.5
 
-    "session_duration": float(data["session_duration"]),
+    if response_time > 180:
+        credit_score -= (response_time - 180) * 0.2
 
-    "mobile_usage_score": float(data["mobile_usage_score"]),
+    credit_score = int(max(300, min(850, credit_score)))
 
-    "skipped_questions": int(data["skipped_questions"]),
-
-    "expenses": expenses,
-
-    "psychometric_score": psychometric_score
-
-}])
-
-    input_data = input_data[[
-
-    "gender",
-
-    "age",
-
-    "education_years",
-
-    "income_level",
-
-    "financial_literacy",
-
-    "numerical_reasoning",
-
-    "risk_preference",
-
-    "social_capital",
-
-    "consistency_score",
-
-    "response_time",
-
-    "answer_changes",
-
-    "session_duration",
-
-    "mobile_usage_score",
-
-    "skipped_questions",
-
-    "expenses",
-
-    "psychometric_score"
-
-]]
-
-    credit_score = int(
-    model.predict(input_data)[0]
-)
+    # =====================================
+    # CATEGORY
+    # =====================================
 
     if credit_score >= 750:
         category = "Excellent"
+
     elif credit_score >= 650:
         category = "Good"
+
     elif credit_score >= 550:
         category = "Fair"
+
     else:
         category = "Poor"
 
-    repayment_probability = round((credit_score - 300) / 550, 4)
+    # =====================================
+    # REPAYMENT PROBABILITY
+    # =====================================
 
-    repayment_probability = round((credit_score - 300) / 550, 2)
+    repayment_probability = round(
+        ((credit_score - 300) / 550) * 100,
+        1
+    )
+
+    repayment_probability = max(
+        0,
+        min(100, repayment_probability)
+    )
 
     return jsonify({
+
         "credit_score": credit_score,
+
         "category": category,
-        "repayment_probability": repayment_probability
+
+        "repayment_probability": repayment_probability,
+
+        "psychometric_score": round(psychometric_score, 2)
+
     })
+
+
 if __name__ == "__main__":
     app.run(debug=True)
